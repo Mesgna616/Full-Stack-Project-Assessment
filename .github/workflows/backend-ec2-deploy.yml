@@ -36,15 +36,20 @@ jobs:
         run: |
           ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no ubuntu@ec2-35-176-144-41.eu-west-2.compute.amazonaws.com <<'EOF'
             # Navigate to the project directory
-           
-  
+            
             # Stop and remove existing container (handle potential errors)
             docker stop my-video-adder || true
             docker rm my-video-adder || true
-  
+            
             # Pull the latest Docker image
             docker pull mesgna/my-video-adder:latest
-  
-            # Run the new container with environment variables (consider secrets management)
-            docker run -d -p 5000:5000 --name my-video-adder mesgna/my-video-adder:latest
+            
+            # Run the new container with environment variables from GitHub Secrets
+            docker run -d -p 5000:5000 \
+              -e DB_USER=postgres \
+              -e DB_HOST=video-db.c9wqsescwhbl.eu-west-2.rds.amazonaws.com \
+              -e DB_NAME=videos-db \
+              -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              -e DB_PORT=5432 \
+              --name my-video-adder mesgna/my-video-adder:latest
           EOF
