@@ -11,11 +11,10 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the contents of the backend directory to the working directory
-# COPY backend/. . 
 COPY server /app/server
 
 # Expose the port where the app will run
 EXPOSE 5000
 
-# Command to run the application
-CMD ["node", "server/server.js"]
+# Command to run the application with PM2 in watch mode
+CMD ["pm2-runtime", "server/server.js", "--watch"]
