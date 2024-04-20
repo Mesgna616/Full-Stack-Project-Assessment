@@ -26,7 +26,7 @@ jobs:
           
       - name: Build Docker image
         run: |
-          docker build -t mesgna/my-video-adder:latest .
+          docker build -t mesgna/my-video-adder:latest ./server
           
       - name: Push Docker image to Docker Hub
         run: |
