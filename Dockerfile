@@ -19,6 +19,5 @@ COPY server ./server
 # Expose the port where the app will run
 EXPOSE 5000
 
-# Command to run the application with PM2 in watch mode
-CMD ["pm2-runtime", "server/server.js", "--watch"]
-
+# Start the application with PM2
+CMD ["pm2-runtime", "start", "server/server.js", "--watch"]
