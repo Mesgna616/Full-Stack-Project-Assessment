@@ -1,3 +1,4 @@
+# Use Node.js image with Alpine Linux
 FROM node:14-alpine
 
 # Set the working directory in the container
@@ -9,11 +10,8 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the entire server directory to the working directory
-COPY server ./server
-
 # Expose the port where the app will run
 EXPOSE 5000
 
-# Start the application
-CMD ["node", "server/server.js"]
+# Command to run the application
+CMD ["node", "server.js"]
