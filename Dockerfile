@@ -1,5 +1,4 @@
 # Use Node.js image with Alpine Linux
-# Use Node.js image with Alpine Linux
 FROM node:14-alpine
 
 # Set the working directory in the container
@@ -14,11 +13,12 @@ RUN npm install
 # Install PM2 globally
 RUN npm install -g pm2
 
-# Copy the contents of the server directory to the working directory
+# Copy the entire server directory to the working directory
 COPY server ./server
 
 # Expose the port where the app will run
 EXPOSE 5000
 
 # Command to run the application with PM2 in watch mode
-CMD ["pm2-runtime", "server.js", "--watch"]
+CMD ["pm2-runtime", "server/server.js", "--watch"]
+
