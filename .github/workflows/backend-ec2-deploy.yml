@@ -36,8 +36,9 @@ jobs:
         run: |
           ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no ubuntu@ec2-35-176-144-41.eu-west-2.compute.amazonaws.com <<'EOF'
             # Remove old Docker images except the latest one
-            docker images --filter "dangling=true" -q --format '{{.ID}}' | grep $(docker images --filter=reference='mesgna/my-video-adder' -q) | grep -v $(docker images --filter=reference='mesgna/my-video-adder:latest' -q) | xargs -r docker rmi -f
-
+            docker images --filter "dangling=true" --filter=reference='mesgna/my-video-adder*' -q \
+              | grep -v "$(docker images --filter=reference='mesgna/my-video-adder:latest' -q)" \
+              | xargs -r docker rmi -f
 
             # Stop and remove existing container (handle potential errors)
             docker stop my-video-adder || true
