@@ -35,16 +35,14 @@ jobs:
       - name: Connect to EC2 and Run Container
         run: |
           ssh -i ~/.ssh/secretKey.pem -o StrictHostKeyChecking=no ubuntu@ec2-35-176-144-41.eu-west-2.compute.amazonaws.com <<'EOF'
-          # Remove old Docker images except the latest one
-          docker images --filter "dangling=true" -q --format '{{.Repository}}:{{.Tag}}' | grep mesgna/my-video-adder | grep -v latest | xargs -r docker rmi -f
+            # Remove old Docker images except the latest one
+            docker images --filter "dangling=true" -q --format '{{.Repository}}:{{.Tag}}' | grep mesgna/my-video-adder | grep -v latest | xargs -r docker rmi -f
 
-
-
-             # Stop and removeed existing container (handle potential errors)
+            # Stop and remove existing container (handle potential errors)
             docker stop my-video-adder || true
             docker rm my-video-adder || true
             
-            # Pull the latest Docker images
+            # Pull the latest Docker image
             docker pull mesgna/my-video-adder:latest
             
             # Run the new container with environment variables from GitHub Secrets
