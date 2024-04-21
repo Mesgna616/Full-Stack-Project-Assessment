@@ -41,7 +41,7 @@ jobs:
             docker stop my-video-adder || true
             docker rm my-video-adder || true
             
-            # Pull the latest Docker image
+            # Pull the latest Docker images
             docker pull mesgna/my-video-adder:latest
             
             # Run the new container with environment variables from GitHub Secrets
