@@ -28,12 +28,6 @@ jobs:
         run: |
           docker build -t mesgna/my-video-adder:latest  -f server/dockerfile .
 
-          - name: Remove dangling and untagged images
-          run: |
-            docker images --filter "dangling=true" --filter=reference='mesgna/my-video-adder*' -q \
-              | xargs -r docker rmi -f
-
-
       - name: Push Docker image to Docker Hub
         run: |
           docker push mesgna/my-video-adder:latest
