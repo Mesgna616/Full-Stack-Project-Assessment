@@ -23,7 +23,7 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(bodyParser.json());
 app.use(cors());
 app.get("/", (req, res) => {
-  res.send("Hello from the  my  cool Server Mesgna Mehari Woldeab!!!!!");
+  res.send("Hello from the  my  cool  node Server Mesgna Mehari Woldeab!!!!!");
 });
 
 app.get("/videos", (req, res) => {
