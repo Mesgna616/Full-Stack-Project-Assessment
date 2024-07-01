@@ -34,4 +34,4 @@ jobs:
           aws-region: ${{ secrets.REGION }}
 
       - name: Sync client/build to S3 bucket
-        run: aws s3 sync client/build/ s3://video-recommendation-2024
+        run: aws s3 sync client/build/ s3://video-player-mesgna-2024
